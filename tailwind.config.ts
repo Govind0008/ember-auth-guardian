@@ -119,6 +119,71 @@ export default {
 					'50%': {
 						transform: 'translateY(-5px)'
 					}
+				},
+				// New animations
+				'shimmer': {
+					'0%': { backgroundPosition: '200% 0' },
+					'100%': { backgroundPosition: '0% 0' }
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-20px)'
+					}
+				},
+				'float-slow': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'float-slow-reverse': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(10px)'
+					}
+				},
+				'float-3d': {
+					'0%, 100%': {
+						transform: 'translateY(0) translateX(0) rotate(0)'
+					},
+					'25%': {
+						transform: 'translateY(-5px) translateX(5px) rotate(5deg)'
+					},
+					'50%': {
+						transform: 'translateY(0) translateX(0) rotate(0)'
+					},
+					'75%': {
+						transform: 'translateY(5px) translateX(-5px) rotate(-5deg)'
+					}
+				},
+				'float-3d-reverse': {
+					'0%, 100%': {
+						transform: 'translateY(0) translateX(0) rotate(0)'
+					},
+					'25%': {
+						transform: 'translateY(5px) translateX(-5px) rotate(-5deg)'
+					},
+					'50%': {
+						transform: 'translateY(0) translateX(0) rotate(0)'
+					},
+					'75%': {
+						transform: 'translateY(-5px) translateX(5px) rotate(5deg)'
+					}
+				},
+				'pulse-glow': {
+					'0%, 100%': {
+						textShadow: '0 0 10px rgba(74, 108, 247, 0.5), 0 0 20px rgba(74, 108, 247, 0.3)'
+					},
+					'50%': {
+						textShadow: '0 0 20px rgba(74, 108, 247, 0.8), 0 0 30px rgba(74, 108, 247, 0.5)'
+					}
 				}
 			},
 			animation: {
@@ -127,9 +192,49 @@ export default {
 				'fade-in-up': 'fade-in-up 0.5s ease-out',
 				'pulse-subtle': 'pulse-subtle 2s infinite ease-in-out',
 				'spin-slow': 'spin-slow 20s linear infinite',
-				'bounce-subtle': 'bounce-subtle 2s infinite ease-in-out'
+				'bounce-subtle': 'bounce-subtle 2s infinite ease-in-out',
+				// New animations
+				'shimmer': 'shimmer 2s infinite linear',
+				'float': 'float 4s ease-in-out infinite',
+				'float-slow': 'float-slow 8s ease-in-out infinite',
+				'float-slow-reverse': 'float-slow-reverse 8s ease-in-out infinite',
+				'float-3d': 'float-3d 8s ease-in-out infinite',
+				'float-3d-reverse': 'float-3d-reverse 8s ease-in-out infinite',
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite'
+			},
+			boxShadow: {
+				'glow': '0 0 15px rgba(74, 108, 247, 0.5)',
+				'glow-intense': '0 0 25px rgba(74, 108, 247, 0.7)'
+			},
+			textShadow: {
+				'glow': '0 0 10px rgba(74, 108, 247, 0.5), 0 0 20px rgba(74, 108, 247, 0.3)'
+			},
+			perspective: {
+				'1000': '1000px'
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		// Add text-shadow plugin
+		function({ addUtilities }) {
+			const newUtilities = {
+				'.text-shadow-glow': {
+					textShadow: '0 0 10px rgba(74, 108, 247, 0.5), 0 0 20px rgba(74, 108, 247, 0.3)'
+				},
+			}
+			addUtilities(newUtilities)
+		},
+		// Add text gradient plugin
+		function({ addUtilities }) {
+			const newUtilities = {
+				'.text-gradient': {
+					background: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))',
+					'-webkit-background-clip': 'text',
+					'-webkit-text-fill-color': 'transparent',
+				},
+			}
+			addUtilities(newUtilities)
+		}
+	],
 } satisfies Config;
