@@ -4,14 +4,10 @@ import { useAuth } from "@/contexts/AuthContext";
 
 interface PrivateRouteProps {
   children: React.ReactNode;
-  requiredRole?: string;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ 
-  children, 
-  requiredRole 
-}) => {
-  const { isAuthenticated, userRole, loading } = useAuth();
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
@@ -25,12 +21,6 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   if (!isAuthenticated) {
     // Redirect to login if not authenticated
     return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  // Check if the user has the required role
-  if (requiredRole && userRole !== requiredRole) {
-    // Redirect to unauthorized page if role doesn't match
-    return <Navigate to="/unauthorized" replace />;
   }
 
   return <>{children}</>;

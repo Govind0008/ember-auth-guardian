@@ -8,10 +8,13 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./contexts/AuthContext";
 import LoginPage from "./pages/LoginPage";
-import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
 import PrivateRoute from "./components/PrivateRoute";
+import PdfQueryPage from "./pages/PdfQueryPage";
+import UserAnalyticsPage from "./pages/UserAnalyticsPage";
+import UserSettingsPage from "./pages/UserSettingsPage";
+import GenerateReportPage from "./pages/GenerateReportPage";
 
 const queryClient = new QueryClient();
 
@@ -28,19 +31,46 @@ const App = () => (
             <Route path="/unauthorized" element={<UnauthorizedPage />} />
             
             <Route 
-              path="/admin/dashboard" 
+              path="/user/dashboard" 
               element={
-                <PrivateRoute requiredRole="ADMIN">
-                  <AdminDashboard />
+                <PrivateRoute>
+                  <UserDashboard />
                 </PrivateRoute>
               } 
             />
-            
+
             <Route 
-              path="/user/dashboard" 
+              path="/user/pdf-query" 
               element={
-                <PrivateRoute requiredRole="USER">
-                  <UserDashboard />
+                <PrivateRoute>
+                  <PdfQueryPage />
+                </PrivateRoute>
+              } 
+            />
+
+            <Route 
+              path="/user/analytics" 
+              element={
+                <PrivateRoute>
+                  <UserAnalyticsPage />
+                </PrivateRoute>
+              } 
+            />
+
+            <Route 
+              path="/user/settings" 
+              element={
+                <PrivateRoute>
+                  <UserSettingsPage />
+                </PrivateRoute>
+              } 
+            />
+
+            <Route 
+              path="/user/reports" 
+              element={
+                <PrivateRoute>
+                  <GenerateReportPage />
                 </PrivateRoute>
               } 
             />
