@@ -15,71 +15,74 @@ import PdfQueryPage from "./pages/PdfQueryPage";
 import UserAnalyticsPage from "./pages/UserAnalyticsPage";
 import UserSettingsPage from "./pages/UserSettingsPage";
 import GenerateReportPage from "./pages/GenerateReportPage";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/unauthorized" element={<UnauthorizedPage />} />
-            
-            <Route 
-              path="/user/dashboard" 
-              element={
-                <PrivateRoute>
-                  <UserDashboard />
-                </PrivateRoute>
-              } 
-            />
+    <ThemeProvider defaultTheme="light" storageKey="rag-spring-theme">
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/unauthorized" element={<UnauthorizedPage />} />
+              
+              <Route 
+                path="/user/dashboard" 
+                element={
+                  <PrivateRoute>
+                    <UserDashboard />
+                  </PrivateRoute>
+                } 
+              />
 
-            <Route 
-              path="/user/pdf-query" 
-              element={
-                <PrivateRoute>
-                  <PdfQueryPage />
-                </PrivateRoute>
-              } 
-            />
+              <Route 
+                path="/user/pdf-query" 
+                element={
+                  <PrivateRoute>
+                    <PdfQueryPage />
+                  </PrivateRoute>
+                } 
+              />
 
-            <Route 
-              path="/user/analytics" 
-              element={
-                <PrivateRoute>
-                  <UserAnalyticsPage />
-                </PrivateRoute>
-              } 
-            />
+              <Route 
+                path="/user/analytics" 
+                element={
+                  <PrivateRoute>
+                    <UserAnalyticsPage />
+                  </PrivateRoute>
+                } 
+              />
 
-            <Route 
-              path="/user/settings" 
-              element={
-                <PrivateRoute>
-                  <UserSettingsPage />
-                </PrivateRoute>
-              } 
-            />
+              <Route 
+                path="/user/settings" 
+                element={
+                  <PrivateRoute>
+                    <UserSettingsPage />
+                  </PrivateRoute>
+                } 
+              />
 
-            <Route 
-              path="/user/reports" 
-              element={
-                <PrivateRoute>
-                  <GenerateReportPage />
-                </PrivateRoute>
-              } 
-            />
+              <Route 
+                path="/user/reports" 
+                element={
+                  <PrivateRoute>
+                    <GenerateReportPage />
+                  </PrivateRoute>
+                } 
+              />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AuthProvider>
-      </BrowserRouter>
-    </TooltipProvider>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AuthProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
